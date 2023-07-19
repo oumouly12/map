@@ -1,0 +1,177 @@
+<div>
+  <div >
+    <form #formprojet="ngForm" (ngSubmit)="postprojet()"  id="main" *ngIf="!isformsubmitted">
+  
+      <table>
+        <tr>
+          <td class="p" >
+            <label>Nom Chantier</label>
+            <input name="nom_projet" class="form-control" id="nom_projet" type="text"  [(ngModel)]="addprojet.nom_projet">
+          </td>
+          <td >
+       
+            <input name="data_create" class="form-control" id="data_create" type="hidden" [(ngModel)]="addprojet.data_create">
+          </td>
+          <tr>
+            <td> 
+              <label>Topologie de balisage</label>
+              <select class="form-control" name="topobalisage" [(ngModel)]="addprojet.topobalisage">
+                <option>Fermeture</option>
+                <option>Ouverture</option>
+              </select>
+            </td>
+          </tr>
+          <mat-divider> Localisation du projet</mat-divider>
+  
+          <tr>
+           <td>
+            <label>Axe</label>
+            <input 
+               class="form-control" 
+                type="text" name="axe" [(ngModel)]="addprojet.axe"></td>
+           
+            <td>
+              <label>PR début</label>
+             <input type="number" class="form-control" name="pr_debut" [(ngModel)]="addprojet.pr_debut"></td>       
+          
+             <td>
+            <label>PR fin</label>
+            <input type="number"  class="form-control" name="pr_fin" [(ngModel)]="addprojet.pr_fin"></td>
+           
+          </tr>
+  
+          <tr>
+           
+            <td>
+              <label>sens</label>
+              <select   class="form-control" name="sens" [(ngModel)]="addprojet.sens">
+                <option>1</option>
+                <option>2</option>
+              </select>
+            </td>
+            <td>
+              <label >Travaux</label>
+              <select class="form-control"  name="travaux" [(ngModel)]="addprojet.travaux">
+                <option> Nuit</option>
+                <option>Jour</option>
+              </select>
+            
+            </td>
+            <td> <label>Voies</label>
+              <select  class="form-control" name="voies" [(ngModel)]="addprojet.voies">
+                <option>VM1</option>
+                <option>BAU</option>
+                <option>VM3</option>
+                <option>VM5</option>
+              </select></td>
+           
+          </tr>
+  
+          <!-- <tr>
+            <td>
+              <label >Travaux</label>
+              <select class="form-control"  name="travaux" [(ngModel)]="addprojet.travaux">
+                <option> Nuit</option>
+                <option>Jour</option>
+              </select>
+            
+            </td>
+            
+          </tr> -->
+  
+          <tr>
+            <td >
+              <label>Date de debut</label>
+              <input name="debut_projet" class="form-control" id="debut_projet" type="date"  [(ngModel)]="addprojet.debut_projet">
+            </td>
+            <td >
+              <label>date de fin</label>
+              <input name="fin_projet" class="form-control" id="fin_projet" type="date" [(ngModel)]="addprojet.fin_projet">
+            </td>
+            <td >
+              <label> Heure d'Ouverture </label>
+              <input name="ouverture" class="form-control" id="ouverture" type="time" [(ngModel)]="addprojet.heure_ouverture">
+            </td>
+            <td >
+              <label>Heure de Fermeture </label>
+              <input name="fermeture" class="form-control" id="fermeture" type="time" [(ngModel)]="addprojet.heure_fermeture">
+            </td>
+          </tr>
+
+          
+       
+      </table>
+      <button type="submit" class="btn btn-primary" id="subbutton" style="padding: auto;background-color: rgb(0, 187, 255); border-radius: 50px;  height: 45px; width: 45;"
+      
+      >Créer un nouveau projet</button>
+  
+    </form>
+  </div>
+  
+  <!-- <div *ngIf="isformsubmitted">
+    <button (click)="postgeomprojet('TT6')">Ouvrir Projet</button>
+  </div> -->
+   <!-- <div *ngIf="isformsubmitted">
+  <h1> Entrer votre liste de taches !</h1>
+  
+  
+  <form id="file-upload-form" class="uploader">
+      <input id="file-upload" type="file"
+      (change)="fileUpload($event)"
+      name="fileUpload" accept=".xls, .xlsx"/>
+      <label for="file-upload " id="file-drag"></label>
+  </form> 
+  
+  
+   </div>
+  <div *ngIf="formtache">
+  
+        
+  <form  #form="ngForm" (ngSubmit)="onSubmit()">
+   
+    <table>
+     
+      <tr>
+        <td>Nom</td>
+        <td>Nom projet</td>
+        <td>Date_debut</td>
+        <td> Date_fin</td>
+        <td>Gometrie</td>
+        
+      </tr>
+      <tr *ngFor="let tache of convertedJSON">
+        
+        <td >
+          <input name="nom" class="form-control" id="nom" type="text"  value="{{tache.nom}}" >
+        </td>
+        <td >
+          <input name="nom_projet" class="form-control" id="nom_projet" type="text" value="{{nom_projet}}">
+        </td>
+        <td >
+          <input name="debut_tache" class="form-control" id="debut_tache" type="text" value="{{tache.debut_tache}}">
+        </td>
+        <td >
+          <input name="fin_tache" class="form-control" id="debut_tache" type="text" value="{{tache.fin_tache}}">
+        </td>
+        <td >
+          
+          <mat-form-field appearance="fill">
+            <mat-label>Associer a la bonne geometrie</mat-label>
+            <mat-select name="geomid" type="table" class="form-control" multiple>
+              <mat-option *ngFor="let topping of geom"   (click)="addgeom(topping, tache , addprojet.nom_projet)" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      
+      </tr>
+       
+      </table>
+      <button type="submit" class="btn btn-primary">enregistrer</button>
+    </form>
+    
+  </div> 
+  </div>
+  
+  
+  
+   -->

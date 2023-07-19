@@ -1,0 +1,75 @@
+
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened id="drawer1">
+    <mat-toolbar style="background-color: midnightblue;">
+      <button (click)="returnpage()"><img src="/assets/icon retour.png" style="width: 10px; background-color: aliceblue;"> RETOUR PROJETS</button>
+    </mat-toolbar>
+   
+    <div id="mytache"> 
+      <h2>{{nom_projet}}</h2><br>
+      <div style="background-color: #f8f398;" >
+        <h3 style="background-color: #f8f398;">Du {{debut_projet | date :'dd/MM/YYY'}} au {{fin_projet | date :'dd/MM/YYYY'}}</h3>
+      </div>
+     
+      <ng-container *ngFor="let tache of projets">
+       
+         <table  (click)="selected(tache.id)">
+          <tr>
+            <td>
+              <label>{{tache.debut_projet |date :'dd/MM/YYYY'}}</label>
+              
+            </td>
+            </tr>
+            <tr>
+              <th id="idgeom" style="background-color:#F7DC6F; border-radius: 5px; width: 1%;" >{{tache.axe}}</th>
+              
+              <td>{{tache.topobalisage}}</td> 
+              <td>{{tache.travaux}}</td>        
+              <td> Sens {{tache.sens}}</td>
+              <th style=" border-radius: 50px; border-color: #F7DC6F; border-style: solid; width: 100px;" >{{tache.pr_debut}}</th>
+            </tr>
+            <mat-divider ></mat-divider>
+         </table>
+
+        <div id="mySidenav" class="sidenav"  *ngIf="selected">
+          <a  class="closebtn" (click)="closeNav()">&times;</a>
+          <table id="customers">
+          <tr>
+          <td>Dates</td>
+          <td>Ouverture</td>
+          <td>Fermeture</td>
+          <td>Repéres</td>
+
+          </tr>
+          <tr class="date" *ngFor="let date of dates">
+          <td>{{ date | date: 'dd/MM/YYYY'}}</td>
+          <td >{{ ouverture }}</td>
+          <td >{{ fermeture }}</td>
+          <td >{{tache.pr_debut}}</td>
+          <td></td>
+          </tr>
+          </table>
+          </div>
+        </ng-container>
+    </div>
+    
+
+    
+  
+  </mat-drawer>
+  <mat-drawer-content id="main">
+    <div id ="calender"> Du 12 {{debut_projet | date:'dd/MMMYYY'}} AU {{fin_projet | date:'dd/MM/YYY'}}</div>
+    
+    <div>
+      <div class="map-container">
+      
+        <div id="map"></div>
+      
+    </div>
+  </div> 
+   
+  </mat-drawer-content>
+    
+  
+</mat-drawer-container>
+
